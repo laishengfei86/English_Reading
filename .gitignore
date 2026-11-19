@@ -1,0 +1,30 @@
+# ============ 本地运行数据（绝不入库） ============
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# ============ 自签名证书 / 私钥（绝不入库） ============
+certs/
+*.pem
+*.key
+
+# ============ 本地密钥与配置 ============
+.env
+.env.local
+.secret
+*.secret
+
+# ============ 浏览器测试 / IDE 临时产物 ============
+.playwright-cli/
+*.yaml
+*.log
+badge.png
+edge_test.mjs
+modal.yaml
+
+# ============ 通用 ============
+node_modules/
+.DS_Store
+Thumbs.db
+*.tmp

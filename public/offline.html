@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f172a" />
+<title>离线中 · 美语听读</title>
+<style>
+  :root { color-scheme: dark; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: grid; place-items: center;
+    background: #0b1120; color: #e8edf7;
+    font: 15px/1.7 "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  }
+  .card { text-align: center; padding: 32px; max-width: 340px; }
+  .logo { font-size: 52px; }
+  h1 { font-size: 19px; margin: 10px 0 6px; }
+  p { color: #a9b6d0; margin: 0 0 22px; }
+  button {
+    appearance: none; border: 0; cursor: pointer;
+    padding: 12px 30px; border-radius: 12px;
+    background: #2563eb; color: #fff; font-size: 15px;
+  }
+  button:active { transform: scale(.97); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🎧</div>
+    <h1>当前离线</h1>
+    <p>恢复网络后自动可用。<br />已缓存的素材与页面可继续使用——回到应用即可。</p>
+    <button onclick="location.replace('/')">重试连接</button>
+  </div>
+</body>
+</html>

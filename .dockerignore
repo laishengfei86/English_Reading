@@ -1,0 +1,26 @@
+# 版本控制 / 工具元数据
+.git
+.workbuddy
+
+# 依赖（零依赖项目，镜像内也不需要）
+node_modules
+
+# 运行态数据：以卷挂载，不进镜像
+data
+certs
+
+# 环境变量（用户自己的 .env 不应进镜像；.env.example 已在 Dockerfile 显式 COPY）
+.env
+.env.*
+
+# 日志 / 临时测试脚本
+*.log
+edge_test.mjs
+
+# 容器相关文件本身不要进构建上下文
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# 文档（可选，按需保留）
+README.md

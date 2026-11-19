@@ -1,0 +1,26 @@
+{
+  "id": "/",
+  "name": "美语听读 · 标准美式发音跟读评分",
+  "short_name": "美语听读",
+  "description": "标准美式发音英语学习：听读 → 跟读 → 复读对比 → 发音评分",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "background_color": "#0b1120",
+  "theme_color": "#0f172a",
+  "categories": ["education"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "开始练习", "short_name": "练习", "url": "/?view=practice", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "我的素材", "short_name": "素材", "url": "/?view=library", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "学习进度", "short_name": "进度", "url": "/?view=progress", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

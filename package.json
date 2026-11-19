@@ -1,0 +1,18 @@
+{
+  "name": "am-english-reader",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "标准美式发音英语听读跟读评分系统（零依赖 Node 服务 + 原生前端）",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node --experimental-sqlite server/server.js",
+    "dev": "node --experimental-sqlite --watch server/server.js",
+    "smoke": "node scripts/smoke.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "license": "MIT"
+}

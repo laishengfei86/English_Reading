@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f172a" />
+<title>美语听读 · 标准美式发音跟读评分系统</title>
+<link rel="icon" href="/icons/favicon-32.png" type="image/png" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="美语听读" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="icon-btn only-mobile" id="menuBtn" aria-label="打开菜单" title="菜单">☰</button>
+    <div class="brand">
+      <span class="logo">🎧</span>
+      <div class="brand-text">
+        <strong>美语听读</strong>
+        <small>标准美式发音 · 听读 / 跟读 / 评分</small>
+      </div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <button class="btn ghost auth-btn" id="loginBtn">👤 登录</button>
+    <div class="user-box" id="userBox" hidden>
+      <span class="user-name" id="userName"></span>
+      <button class="btn ghost" id="logoutBtn">退出</button>
+    </div>
+    <button class="icon-btn install-btn" id="installBtn" hidden title="安装到桌面">📲</button>
+    <span class="badge" id="engineBadge" title="当前语音与评分引擎">引擎加载中…</span>
+    <button class="icon-btn" id="themeBtn" title="切换深浅色">🌓</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-view="practice"><span>🎤</span>练习</button>
+  <button class="tab" data-view="library"><span>📚</span>素材</button>
+  <button class="tab" data-view="dub"><span>🎬</span>配音</button>
+  <button class="tab" data-view="phonics"><span>🔤</span>拼读</button>
+  <button class="tab" data-view="roots"><span>🧬</span>词根</button>
+  <button class="tab" data-view="wordbook"><span>📕</span>单词本</button>
+  <button class="tab" data-view="progress"><span>📈</span>进度</button>
+  <button class="tab" data-view="settings"><span>⚙️</span>设置</button>
+</nav>
+
+<main class="main">
+
+  <!-- ============ 练习 ============ -->
+  <section class="view active" id="view-practice">
+    <div class="practice-layout">
+
+      <aside class="side" id="sidePanel">
+        <div class="side-head">
+          <select id="levelSelect" class="select" aria-label="选择级别"></select>
+          <button class="icon-btn only-mobile" id="sideClose" title="收起">✕</button>
+        </div>
+        <select id="groupSelect" class="select" aria-label="选择分组"></select>
+        <div class="group-desc" id="groupDesc"></div>
+        <ol class="item-list" id="itemList"></ol>
+      </aside>
+
+      <div class="stage">
+        <div class="stage-head">
+          <button class="btn ghost only-mobile" id="sideOpen">📚 选材料</button>
+          <div class="crumb" id="crumb">—</div>
+          <div class="counter" id="counter">0 / 0</div>
+        </div>
+
+        <div class="card mode-switch" id="modeSwitch">
+          <div class="seg">
+            <button class="seg-btn on" data-mode="read" id="modeRead">🎤 跟读</button>
+            <button class="seg-btn" data-mode="dictation" id="modeDict">✍️ 听写</button>
+          </div>
+          <small class="mode-tip" id="modeTip">听一句，读一句，自动评分</small>
+        </div>
+
+        <div class="card sentence-card" id="readCard">
+          <div class="sentence" id="sentenceText">请从左侧选择练习材料</div>
+          <div class="ipa" id="sentenceIpa"></div>
+          <div class="zh" id="sentenceZh"></div>
+          <div class="hint-row" id="focusRow"></div>
+        </div>
+
+        <div class="card custom-mode" id="customModeRow" hidden>
+          <span class="muted">朗读方式</span>
+          <div class="seg">
+            <button class="seg-btn" data-m="auto">分句</button>
+            <button class="seg-btn" data-m="paragraph">段落</button>
+            <button class="seg-btn" data-m="whole">整篇</button>
+          </div>
+        </div>
+
+        <div class="card controls">
+          <div class="ctrl-main">
+            <button class="btn icon-lg" id="prevBtn" title="上一句">⏮</button>
+            <button class="btn primary big" id="playBtn">▶ 播放原音</button>
+            <button class="btn icon-lg" id="nextBtn" title="下一句">⏭</button>
+          </div>
+          <div class="ctrl-row">
+            <label class="rate">
+              <span>语速 <b id="rateVal">1.0×</b></span>
+              <input type="range" id="rateRange" min="0.5" max="1.5" step="0.05" value="1" />
+            </label>
+            <div class="chip-row">
+              <button class="chip" id="loopBtn" title="循环播放当前句">🔁 循环</button>
+              <button class="chip" id="autoNextBtn" title="播完自动下一句">⏭ 连读</button>
+              <button class="chip" id="slowBtn" title="0.7 倍慢速示范">🐢 慢放</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card record">
+          <div class="rec-top">
+            <button class="mic" id="micBtn" title="开始/停止录音">
+              <span class="mic-icon">🎙</span>
+              <span class="mic-text">按此录音</span>
+            </button>
+            <div class="rec-meta">
+              <canvas id="waveCanvas" height="56"></canvas>
+              <div class="rec-info"><span id="recTimer">00:00</span><span id="recTip">跟读后自动评分</span></div>
+            </div>
+          </div>
+          <div class="rec-actions">
+            <button class="btn" id="playMineBtn" disabled>🔊 我的录音</button>
+            <button class="btn" id="abBtn" disabled>🆚 原音对比</button>
+            <button class="btn" id="scoreBtn" disabled>📊 重新评分</button>
+            <button class="btn ghost" id="resetRecBtn" disabled>♻️ 重录</button>
+            <a class="btn ghost" id="dlBtn" download="my-reading.wav" hidden>⬇️ 下载录音</a>
+          </div>
+        </div>
+
+        <div class="card result" id="resultCard" hidden>
+          <div class="result-head">
+            <div class="ring" id="ring">
+              <svg viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="52" />
+                <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52" />
+              </svg>
+              <div class="ring-text"><b id="overallVal">0</b><small>总分</small></div>
+            </div>
+            <div class="dims">
+              <div class="dim"><span>发音准确度</span><div class="bar"><i id="barAcc"></i></div><b id="valAcc">0</b></div>
+              <div class="dim"><span>流利度</span><div class="bar"><i id="barFlu"></i></div><b id="valFlu">0</b></div>
+              <div class="dim"><span>完整度</span><div class="bar"><i id="barCom"></i></div><b id="valCom">0</b></div>
+              <div class="dim" id="prosodyRow" hidden><span>语调</span><div class="bar"><i id="barPro"></i></div><b id="valPro">0</b></div>
+              <div class="engine-note" id="engineNote"></div>
+            </div>
+          </div>
+
+          <h4 class="sec-title">逐词判读 <small>点击单词可单独发音 / 查看音素提示</small></h4>
+          <div class="word-grid" id="wordGrid"></div>
+          <div class="legend">
+            <span><i class="dot good"></i>良好 ≥85</span>
+            <span><i class="dot warn"></i>待改进 66-84</span>
+            <span><i class="dot bad"></i>读错 &lt;66</span>
+            <span><i class="dot miss"></i>漏读</span>
+          </div>
+
+          <div id="wordDetail" class="word-detail" hidden></div>
+
+          <h4 class="sec-title" id="issueTitle" hidden>高频易错音素</h4>
+          <div class="issue-list" id="issueList"></div>
+
+          <h4 class="sec-title">改进建议</h4>
+          <ul class="advice" id="adviceList"></ul>
+
+          <div class="metrics" id="metricsBox"></div>
+        </div>
+
+        <div class="card dictation" id="dictationCard" hidden>
+          <div class="dict-head">
+            <span class="muted" id="dictMeaning"></span>
+            <span class="dict-progress" id="dictProgress"></span>
+          </div>
+          <textarea id="dictInput" class="dict-input" rows="3" placeholder="听完后在此拼写整句……（回车提交，Shift+Enter 换行）" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
+          <div class="dict-actions">
+            <button class="btn" id="dictReplay">🔁 重听</button>
+            <button class="btn" id="dictReplaySlow">🐢 慢放</button>
+            <button class="btn" id="dictHintBtn">💡 提示</button>
+            <button class="btn" id="dictAnswer">👁 看答案</button>
+            <button class="btn primary" id="dictSubmit">✅ 提交</button>
+            <button class="btn ghost" id="dictNext" hidden>下一句 ⏭</button>
+          </div>
+          <div class="dict-result" id="dictResult" hidden></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 素材 ============ -->
+  <section class="view" id="view-library">
+    <div class="card">
+      <h3>自定义文本</h3>
+      <p class="muted">粘贴任意英文（文章、台词、邮件、技术文档均可），系统会自动分句，逐句跟读评分。</p>
+      <textarea id="customText" rows="7" placeholder="Paste your English text here…&#10;例如：The tolerance on this dimension is plus or minus 0.02 mm."></textarea>
+      <div class="row gap wrap">
+        <input class="input" id="customTitle" placeholder="给这份材料起个名字（可选）" />
+        <label class="field-inline">朗读方式
+          <select class="select" id="customSplitMode">
+            <option value="auto">自动分句（逐句跟读）</option>
+            <option value="paragraph">按段落（空行分段，不强制分句）</option>
+            <option value="whole">整篇（一口气读完整段）</option>
+          </select>
+        </label>
+        <label class="btn ghost">📄 导入 .txt<input type="file" id="fileInput" accept=".txt,.md,text/plain" hidden /></label>
+        <button class="btn primary" id="customStart">▶ 开始练习</button>
+        <button class="btn" id="customSave">💾 保存到我的素材</button>
+      </div>
+      <div class="preview" id="customPreview"></div>
+    </div>
+
+    <div class="card">
+      <h3>我的素材</h3>
+      <div class="my-list" id="myTexts"><p class="muted">暂无保存的素材。</p></div>
+    </div>
+
+    <div class="card">
+      <h3>内置分级素材</h3>
+      <div class="lib-tree" id="libTree"></div>
+    </div>
+  </section>
+
+  <!-- ============ 进度 ============ -->
+  <section class="view" id="view-progress">
+    <div class="card checkin-card">
+      <div class="checkin-head">
+        <div class="checkin-streak">
+          <span class="ck-flame">🔥</span>
+          <div><b id="ckStreak">0</b><small>天连续达标</small></div>
+        </div>
+        <div class="checkin-today">
+          <div class="ck-progress"><div class="ck-bar" id="ckBar"></div></div>
+          <small id="ckTodayLabel" class="muted">今日 0 / 5</small>
+        </div>
+        <button class="btn primary" id="ckGoPractice">去练习</button>
+      </div>
+      <div class="checkin-cal" id="ckCal"></div>
+    </div>
+
+    <div class="card plan-card">
+      <h3>🤖 今日学习计划 <small class="muted">根据你的练习情况自动推送</small></h3>
+      <div id="ckPlan" class="plan-list"></div>
+    </div>
+
+    <div class="card growth-card" id="growthCard">
+      <div class="growth-head">
+        <div class="growth-lv" id="growthLv">Lv.1 萌新</div>
+        <small class="muted" id="growthXp">0 XP</small>
+      </div>
+      <div class="growth-progress"><div class="growth-bar" id="growthBar"></div></div>
+      <div class="growth-kpis" id="growthStats"></div>
+    </div>
+
+    <div class="stat-grid" id="statGrid"></div>
+
+    <div class="card">
+      <h3>得分趋势 <small class="muted">最近 40 次练习</small></h3>
+      <canvas id="trendChart" height="240"></canvas>
+      <div class="chart-legend">
+        <span><i style="background:#3b82f6"></i>总分</span>
+        <span><i style="background:#22c55e"></i>准确度</span>
+        <span><i style="background:#f59e0b"></i>流利度</span>
+        <span><i style="background:#a855f7"></i>完整度</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>每日练习量</h3>
+        <canvas id="dayChart" height="200"></canvas>
+      </div>
+      <div class="card">
+        <h3>高频易错音素</h3>
+        <div id="phonemeStats" class="rank-list"></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>高频读错单词</h3>
+        <div id="wordStats" class="rank-list"></div>
+      </div>
+      <div class="card">
+        <h3>练习历史</h3>
+        <div id="historyList" class="history"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 配音秀 ============ -->
+  <section class="view" id="view-dub">
+    <!-- ① 选剧本 -->
+    <div id="dubPicker">
+      <div class="card">
+        <h3>🎬 配音秀 <small class="muted">选一部短剧，挑一个角色，配出你自己的版本</small></h3>
+        <p class="muted" style="margin:2px 0 12px">剧本均为本项目<b>原创创作</b>，可自由使用。对手台词由 AI 语音自动演绎，你只需配你自己那部分。全部录完还能整幕连放。</p>
+        <div id="dubSceneList" class="dub-scene-list"></div>
+      </div>
+    </div>
+
+    <!-- ② 配音舞台 -->
+    <div id="dubStage" hidden>
+      <div class="card dub-top">
+        <button class="btn ghost" id="dubBackBtn">← 换个剧本</button>
+        <div class="dub-title-box">
+          <b id="dubTitle"></b>
+          <small class="muted" id="dubSub"></small>
+        </div>
+      </div>
+
+      <div class="dub-body">
+        <div class="card dub-script-card">
+          <div class="dub-progress-bar"><span id="dubProgress"></span></div>
+          <div id="dubScript" class="dub-script"></div>
+        </div>
+
+        <div class="card dub-rec-card">
+          <div class="dub-cur">
+            <span class="dub-cur-role" id="dubCurRole"></span>
+            <div class="dub-cur-text" id="dubCurText"></div>
+            <div class="dub-cur-zh muted" id="dubCurZh"></div>
+          </div>
+          <canvas id="dubWave" class="dub-wave"></canvas>
+          <div class="dub-controls">
+            <button class="btn" id="dubPrevBtn">← 上一句</button>
+            <button class="btn primary dub-mic" id="dubRecBtn">🎙 配这句</button>
+            <button class="btn" id="dubNextBtn">下一句 →</button>
+          </div>
+          <div class="dub-controls">
+            <button class="btn ghost" id="dubPlayLineBtn">🔊 听对手台词</button>
+            <button class="btn ghost" id="dubMyBtn">▶ 听我的配音</button>
+            <button class="btn ghost" id="dubPlayAllBtn">🎞 整幕连放</button>
+            <button class="btn ghost" id="dubResetBtn">↺ 重配本幕</button>
+          </div>
+          <small class="muted" id="dubMyTip">选中一句开始吧</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 词根词缀 ============ -->
+  <section class="view" id="view-roots">
+    <div class="card">
+      <h3>🧬 词根词缀 <small class="muted">看懂构词逻辑，生词也能猜出大意</small></h3>
+      <div class="rt-modes">
+        <button class="btn primary rt-mode-btn" data-mode="tree">🌳 词族树</button>
+        <button class="btn ghost rt-mode-btn" data-mode="quiz">🧩 拆词组义</button>
+        <button class="btn ghost rt-mode-btn" data-mode="pair">🎯 配对挑战</button>
+      </div>
+      <div id="rtKinds" class="rt-kinds"></div>
+    </div>
+
+    <!-- ① 词族树 -->
+    <div class="card" id="rtTree"></div>
+
+    <!-- ② 拆词组义 -->
+    <div class="card" id="rtQuizBox" hidden>
+      <div id="rtQuizProgress" class="muted"></div>
+      <div id="rtQuizWord" class="rt-quiz-word"></div>
+      <div id="rtQuizZh" class="muted"></div>
+      <div id="rtQuizOptions" class="rt-options"></div>
+      <div id="rtQuizFeedback" class="rt-fb"></div>
+      <button class="btn ghost" id="rtQuizRestart">🔄 换一批题</button>
+    </div>
+
+    <!-- ③ 配对挑战 -->
+    <div class="card" id="rtPairBox" hidden>
+      <div id="rtPairStat" class="muted"></div>
+      <div class="rt-pair-grid">
+        <div id="rtPairLeft" class="rt-col"></div>
+        <div id="rtPairRight" class="rt-col"></div>
+      </div>
+      <div id="rtPairHint" class="rt-hint"></div>
+      <button class="btn ghost" id="rtPairRestart">🔄 换一局</button>
+    </div>
+  </section>
+
+  <!-- ============ 自然拼读 ============ -->
+  <section class="view" id="view-phonics">
+    <div class="card">
+      <h3>🔤 自然拼读 <small class="muted">建立「字母组合 → 发音」的直觉：见词能读、听音能拼</small></h3>
+      <div class="ph-modes">
+        <button class="btn primary ph-mode-btn" data-mode="rules">📖 规则卡</button>
+        <button class="btn ghost ph-mode-btn" data-mode="blend">🎙 拼读跟读</button>
+        <button class="btn ghost ph-mode-btn" data-mode="ear">👂 耳朵考试</button>
+      </div>
+      <div id="phGroups" class="ph-groups"></div>
+    </div>
+
+    <!-- ① 规则卡 -->
+    <div class="card" id="phRules">
+      <div id="phRuleList" class="ph-rule-list"></div>
+    </div>
+
+    <!-- ② 拼读跟读 -->
+    <div class="card ph-blend-card" id="phBlend" hidden>
+      <div class="ph-blend-head">
+        <span class="tag" id="phRuleTag"></span>
+        <div class="ph-blend-nav">
+          <button class="btn ghost" id="phBlendPrev">← 上一个词</button>
+          <button class="btn ghost" id="phBlendNext">下一个词 →</button>
+        </div>
+      </div>
+      <div id="phBlendWord" class="ph-blend-word"></div>
+      <div id="phBlendWordSel" class="ph-word-sel"></div>
+      <small class="muted" id="phBlendTip"></small>
+      <canvas id="phWave" class="ph-wave"></canvas>
+      <div class="ph-blend-acts">
+        <button class="btn" id="phBlendPlay">🔊 听标准音（慢 → 常速）</button>
+        <button class="btn primary" id="phBlendRec">🎙 跟读这句</button>
+      </div>
+      <div id="phBlendScore" class="ph-score"></div>
+    </div>
+
+    <!-- ③ 耳朵考试 -->
+    <div class="card" id="phEar" hidden>
+      <div id="phQuizProgress" class="muted"></div>
+      <div id="phQuizQuestion" class="ph-q"></div>
+      <div class="ph-quiz-acts">
+        <button class="btn" id="phQuizPlay">🔊 再听一次</button>
+        <div class="ph-pair-row">
+          <button class="btn" id="phQuizA" hidden>A</button>
+          <button class="btn" id="phQuizB" hidden>B</button>
+        </div>
+      </div>
+      <div id="phQuizOptions" class="ph-options"></div>
+      <div id="phQuizFeedback" class="ph-fb"></div>
+      <button class="btn ghost" id="phQuizRestart">🔄 换一批题</button>
+    </div>
+  </section>
+
+  <!-- ============ 单词本（错词 + SRS 间隔复习） ============ -->
+  <section class="view" id="view-wordbook">
+    <div class="stat-grid" id="wbStats"></div>
+
+    <div class="card wb-review-bar">
+      <div class="wb-review-info">
+        <strong id="wbDueLabel">加载中…</strong>
+        <small class="muted" id="wbCountLabel"></small>
+      </div>
+      <button class="btn primary" id="wbStartBtn">开始复习</button>
+    </div>
+
+    <!-- 复习抽认卡 -->
+    <div class="card wb-flash" id="wbFlash" hidden>
+      <div class="wb-flash-top">
+        <span class="wb-flash-pos" id="wbFlashPos"></span>
+        <button class="icon-btn" id="wbFlashSound" title="听发音">🔊</button>
+      </div>
+      <div class="wb-word" id="wbFlashWord">—</div>
+      <div class="wb-ipa" id="wbFlashIpa"></div>
+      <div class="wb-reveal" id="wbFlashZh" hidden></div>
+      <div class="wb-sentence" id="wbFlashSent" hidden></div>
+      <div class="wb-flash-actions">
+        <button class="btn" id="wbFlashReveal">👁 看释义</button>
+        <button class="btn bad" id="wbRate0">😵 忘了</button>
+        <button class="btn warn" id="wbRate3">🤔 模糊</button>
+        <button class="btn good" id="wbRate5">😎 记得</button>
+      </div>
+    </div>
+
+    <!-- 单词列表 -->
+    <div class="card">
+      <h3>我的单词本 <small class="muted">听写/练习中拼错的词会自动进来</small></h3>
+      <div id="wbList" class="wb-list">
+        <div class="muted" style="padding:8px 2px">还没有单词。去「练习 → 听写」模式拼几句，错词会自动收录到这里。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 设置 ============ -->
+  <section class="view" id="view-settings">
+    <div class="card">
+      <h3>语音合成（听读原音）</h3>
+      <div class="field">
+        <label>合成引擎</label>
+        <select class="select" id="setTtsProvider">
+          <option value="edge">在线真人语音 · 微软神经网络（免费 · 推荐）</option>
+          <option value="browser">浏览器内置语音（免费 · 机械音）</option>
+          <option value="azure">服务端 · Azure 神经网络语音（需 Key）</option>
+          <option value="tencent">服务端 · 腾讯云语音合成（需 Key）</option>
+          <option value="openai">服务端 · OpenAI 兼容 TTS（需 Key）</option>
+        </select>
+        <p class="muted" id="ttsProviderTip"></p>
+      </div>
+      <div class="field">
+        <label>美式音色</label>
+        <select class="select" id="setVoice"></select>
+        <p class="muted" id="voiceTip"></p>
+      </div>
+      <div class="field">
+        <label>默认语速</label>
+        <input type="range" id="setRate" min="0.5" max="1.5" step="0.05" />
+        <span id="setRateVal">1.0×</span>
+      </div>
+      <button class="btn" id="testVoiceBtn">🔈 试听：This is standard American English.</button>
+      <button class="btn ghost" id="diagVoiceBtn" style="margin-top:8px">🩺 真人发音自检（定位无声 / 选不了音色）</button>
+      <pre class="diag-out" id="diagOut" hidden></pre>
+    </div>
+
+    <div class="card">
+      <h3>发音评分</h3>
+      <div class="field">
+        <label>评分引擎</label>
+        <select class="select" id="setAssessProvider">
+          <option value="offline">离线声学引擎（零配置 · 估分）</option>
+          <option value="azure">Azure 发音评估（音素级 · 推荐）</option>
+          <option value="tencent">腾讯云智聆口语评测（音素级 · 国内快）</option>
+        </select>
+        <p class="muted" id="assessProviderTip"></p>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="setAsr" />
+        <span>启用浏览器语音识别辅助评分（离线引擎下可判定具体读错的词，需 Chrome/Edge 且能访问识别服务）</span>
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="setAutoScore" />
+        <span>录音结束后自动评分</span>
+      </label>
+    </div>
+
+    <div class="card">
+      <h3>学习档案</h3>
+      <div class="field">
+        <label>学习者标识（用于区分多人使用同一台服务器）</label>
+        <input class="input" id="setUid" maxlength="24" />
+      </div>
+      <div class="field">
+        <label>每日打卡目标（跟读 + 听写练习次数，达标即点亮当天打卡）</label>
+        <input class="input" id="setDailyGoal" type="number" min="1" max="50" step="1" />
+      </div>
+      <label class="ck-line"><input type="checkbox" id="setFunSound" checked /> 🔊 练习反馈音效（评分时的奖励音）</label>
+      <label class="ck-line"><input type="checkbox" id="setFunEffect" checked /> 🎉 庆祝动效（彩带 / 成就弹窗）</label>
+      <div class="row gap wrap">
+        <button class="btn" id="exportBtn">⬇️ 导出完整备份</button>
+        <button class="btn" id="importBtn">⬆️ 导入备份</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden />
+        <button class="btn danger" id="clearBtn">🗑 清空练习记录</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>配置与部署说明</h3>
+      <div class="help" id="helpBox"></div>
+    </div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+
+<!-- ============ 移动端汉堡导航抽屉 ============ -->
+<div class="nav-scrim" id="navScrim"></div>
+<aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="nav-head">
+    <span class="logo">🎧</span>
+    <div class="brand-text">
+      <strong>美语听读</strong>
+      <small id="navEngine">引擎加载中…</small>
+    </div>
+    <button class="icon-btn" id="navClose" title="收起" aria-label="收起菜单">✕</button>
+  </div>
+  <nav class="nav-list" id="navList">
+    <button class="nav-item active" data-view="practice"><span class="ni-ic">🎤</span><span class="ni-tx"><b>练习</b><small>听读 · 跟读 · 评分</small></span></button>
+    <button class="nav-item" data-view="library"><span class="ni-ic">📚</span><span class="ni-tx"><b>素材</b><small>自定义文本 / 内置分级</small></span></button>
+    <button class="nav-item" data-view="dub"><span class="ni-ic">🎬</span><span class="ni-tx"><b>配音秀</b><small>原创剧本 · 角色扮演</small></span></button>
+    <button class="nav-item" data-view="phonics"><span class="ni-ic">🔤</span><span class="ni-tx"><b>自然拼读</b><small>规则卡 · 耳朵考试</small></span></button>
+    <button class="nav-item" data-view="roots"><span class="ni-ic">🧬</span><span class="ni-tx"><b>词根词缀</b><small>词族树 · 配对挑战</small></span></button>
+    <button class="nav-item" data-view="wordbook"><span class="ni-ic">📕</span><span class="ni-tx"><b>单词本</b><small>错词 · 间隔复习</small></span></button>
+    <button class="nav-item" data-view="progress"><span class="ni-ic">📈</span><span class="ni-tx"><b>进度</b><small>趋势 / 错误统计</small></span></button>
+    <button class="nav-item" data-view="settings"><span class="ni-ic">⚙️</span><span class="ni-tx"><b>设置</b><small>引擎 / 音色 / 数据</small></span></button>
+  </nav>
+  <div class="nav-foot">
+    <button class="btn ghost full" id="navThemeBtn">🌓 切换深浅色</button>
+  </div>
+</aside>
+
+<script type="module" src="/js/main.js"></script>
+
+<!-- ============ 登录 / 注册弹层 ============ -->
+<div class="modal-mask" id="authModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="modal-close" id="authClose" aria-label="关闭">✕</button>
+    <h3 id="authTitle">登录</h3>
+    <div class="field">
+      <label>用户名（3-30 位，支持中文/字母/数字/._-）</label>
+      <input class="input" id="authUser" maxlength="30" autocomplete="username" />
+    </div>
+    <div class="field">
+      <label>密码（至少 6 位）</label>
+      <div class="pass-wrap">
+        <input class="input" id="authPass" type="password" maxlength="64" autocomplete="current-password" />
+        <button class="pass-eye" id="authEye" type="button" title="显示/隐藏密码">👁</button>
+      </div>
+      <small class="muted auth-hint">请关闭中文输入法输入密码，避免全角字符导致登录失败</small>
+    </div>
+    <p class="auth-err" id="authErr"></p>
+    <div class="row gap">
+      <button class="btn primary" id="authSubmit">登录</button>
+      <button class="btn ghost" id="authSwitch">去注册</button>
+    </div>
+    <p class="muted auth-tip">登录后你的练习记录、单词本、打卡数据会安全保存在账号下，可在任意设备同步。</p>
+  </div>
+</div>
+</body>
+</html>

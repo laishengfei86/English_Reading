@@ -1,0 +1,62 @@
+# ============================================================
+#  标准美式发音英语听读系统 - 编排配置
+#  用法（在含本文件的目录下）：
+#     docker compose up -d --build      # 首次构建并后台启动
+#     docker compose logs -f             # 看日志
+#     docker compose down                # 停止并移除容器（数据不丢）
+#  升级代码后：
+#     docker compose up -d --build       # 重新构建，旧容器自动替换
+# ============================================================
+
+services:
+  english-reading:
+    build:
+      context: .
+    image: am-english-reader:1.0.0
+    container_name: english-reading
+    # 崩溃/重启自动拉起，解决“这台更新了那台没更新”的运维痛点
+    restart: unless-stopped
+
+    # 进程以 uid=1000 运行，匹配镜像内 node 用户，确保能写数据卷
+    user: "1000:1000"
+
+    ports:
+      - "7000:7000"
+
+    environment:
+      NODE_ENV: "production"
+      PORT: "7000"
+      HOST: "0.0.0.0"
+      TTS_PROVIDER: "edge"          # 在线真人语音（微软神经网络，免费无需 Key）
+      ASSESS_PROVIDER: "offline"    # 内置离线评分引擎
+      # —— HTTPS ——
+      # 留空：只要 certs/ 下 cert.pem+key.pem 存在就自动启用 HTTPS（推荐，手机录音必需）。
+      # 公网部署若用外层 nginx + Let's Encrypt 终结 TLS，则在此显式关闭容器内 TLS：
+      # SSL_ENABLED: "false"
+      # 本地单机使用：显式关闭 TLS，避免自签证书红屏警告（localhost 仍属安全环境，麦克风可用）
+      SSL_ENABLED: "false"
+      # 管理控制台（/admin）访问令牌：在 .env 里设置 ADMIN_TOKEN=你的随机串（.env 已被 git 忽略）
+      # 未设置时退回"仅本机回环"模式。生成一个：node -e "console.log(require('crypto').randomBytes(12).toString('hex'))"
+      ADMIN_TOKEN: "${ADMIN_TOKEN:-}"
+
+    volumes:
+      # 练习记录/自定义素材：用 named volume，权限自动正确，根治 EPERM。
+      - er_data:/app/data
+      # 自签名证书：绑定挂载宿主机目录（没有则走 HTTP；局域网手机录音需放真实证书）
+      - ./certs:/app/certs
+      # 源码/素材绑定挂载：宿主机修改即时生效，免重复构建镜像（内容常迭代）。
+      # 改 public/data/materials.json 或前端/后端代码后，docker restart 即生效；
+      # 纯静态文件（materials.json / api.js）甚至无需重启，浏览器刷新即可见。
+      - ./public:/app/public
+      - ./server:/app/server
+
+    healthcheck:
+      test: ["CMD", "node", "-e", "const net=require('net');const s=net.connect(7000,'127.0.0.1');s.on('connect',()=>{s.destroy();process.exit(0)});s.on('error',()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+# named volume：数据持久化，独立于容器生命周期
+volumes:
+  er_data:
