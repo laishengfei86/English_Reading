@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "note": "美式自然拼读规则集：字形（grapheme）到音素（phoneme）的对应关系，含示例词与发音口型提示。",
+  "groups": [
+    { "id": "short-vowel", "name": "短元音 CVC", "emoji": "🔤", "color": "brand" },
+    { "id": "magic-e", "name": "魔法 e", "emoji": "✨", "color": "good" },
+    { "id": "digraph", "name": "辅音字母组合", "emoji": "🔗", "color": "warn" },
+    { "id": "vowel-team", "name": "元音组合", "emoji": "🎵", "color": "bad" },
+    { "id": "r-controlled", "name": "r 控音", "emoji": "🌀", "color": "brand" },
+    { "id": "endings", "name": "词尾规律", "emoji": "🔚", "color": "good" }
+  ],
+  "rules": [
+    { "id": "sv-a", "group": "short-vowel", "pattern": "a", "sound": "/æ/", "label": "短 a", "tip": "嘴巴张大到能竖放一根手指，舌位低前，短促有力，像被吓到的“啊”。", "examples": ["cat", "map", "hat", "bag"] },
+    { "id": "sv-e", "group": "short-vowel", "pattern": "e", "sound": "/ɛ/", "label": "短 e", "tip": "嘴角微向两边拉，舌位比 /æ/ 略高，短促，像答应一声“诶”。", "examples": ["bed", "pen", "ten", "red"] },
+    { "id": "sv-i", "group": "short-vowel", "pattern": "i", "sound": "/ɪ/", "label": "短 i", "tip": "嘴巴微张、舌头放松，最短最懒的一个音，别拖成长音 /iː/。", "examples": ["sit", "big", "pin", "win"] },
+    { "id": "sv-o", "group": "short-vowel", "pattern": "o", "sound": "/ɑː/", "label": "短 o（美式）", "tip": "美式偏向嘴巴大开的“啊”音，唇不圆，比英式 /ɒ/ 更开。", "examples": ["hot", "top", "box", "dog"] },
+    { "id": "sv-u", "group": "short-vowel", "pattern": "u", "sound": "/ʌ/", "label": "短 u", "tip": "舌中部抬起，短促像被人打一下的“呃”。", "examples": ["cup", "sun", "bus", "run"] },
+
+    { "id": "me-a", "group": "magic-e", "pattern": "a_e", "sound": "/eɪ/", "label": "魔法 e · a_e", "tip": "词尾不发音的 e 让前面的元音读字母本身的音：a 变 /eɪ/，嘴角滑动像微笑。", "examples": ["cake", "name", "game", "late"] },
+    { "id": "me-i", "group": "magic-e", "pattern": "i_e", "sound": "/aɪ/", "label": "魔法 e · i_e", "tip": "从大开的 /a/ 滑到 /ɪ/，像恍然大悟的“啊～伊”。", "examples": ["bike", "time", "nine", "kite"] },
+    { "id": "me-o", "group": "magic-e", "pattern": "o_e", "sound": "/oʊ/", "label": "魔法 e · o_e", "tip": "嘴唇从微圆收到圆小，像吹口哨起势的“欧”。", "examples": ["home", "note", "rose", "bone"] },
+    { "id": "me-u", "group": "magic-e", "pattern": "u_e", "sound": "/juː/", "label": "魔法 e · u_e", "tip": "类似“由”，先轻 /j/ 再长 /uː/，嘴收圆前推。", "examples": ["cute", "use", "mule", "huge"] },
+
+    { "id": "dg-sh", "group": "digraph", "pattern": "sh", "sound": "/ʃ/", "label": "sh", "tip": "舌尖靠近上颚但不碰，气流从窄缝持续送出，声带不振动——像让人安静的“嘘”。", "examples": ["ship", "fish", "shop", "wish"] },
+    { "id": "dg-ch", "group": "digraph", "pattern": "ch", "sound": "/tʃ/", "label": "ch", "tip": "先轻轻碰一下上颚发 /t/，立刻接上 /ʃ/ 的气流，像火车“ch-ch”。", "examples": ["chair", "lunch", "chip", "rich"] },
+    { "id": "dg-th1", "group": "digraph", "pattern": "th（清）", "sound": "/θ/", "label": "th 清音", "tip": "舌尖轻放上下齿之间送气，不振动声带。对着镜子练：看得见舌尖就对了。", "examples": ["think", "bath", "three", "month"] },
+    { "id": "dg-th2", "group": "digraph", "pattern": "th（浊）", "sound": "/ð/", "label": "th 浊音", "tip": "位置和 /θ/ 一样，但喉咙要振动。手摸喉咙能感觉到抖。", "examples": ["this", "that", "mother", "weather"] },
+    { "id": "dg-wh", "group": "digraph", "pattern": "wh", "sound": "/w/", "label": "wh", "tip": "双唇收圆快速滑开，美式通常不发 h 的气声（who 例外读 /h/）。", "examples": ["when", "white", "why", "wheel"] },
+    { "id": "dg-ph", "group": "digraph", "pattern": "ph", "sound": "/f/", "label": "ph", "tip": "上齿轻咬下唇送气，和字母 f 完全同音。", "examples": ["phone", "photo", "graph", "dolphin"] },
+    { "id": "dg-ng", "group": "digraph", "pattern": "ng", "sound": "/ŋ/", "label": "ng", "tip": "舌根抬起抵住软腭，声音从鼻子出来，舌尖不要碰上颚。", "examples": ["sing", "long", "king", "young"] },
+
+    { "id": "vt-ee", "group": "vowel-team", "pattern": "ee / ea", "sound": "/iː/", "label": "ee·ea", "tip": "嘴角向两侧拉开像微笑，持续拉长，是英语最“亮”的长音。", "examples": ["see", "tea", "tree", "clean"] },
+    { "id": "vt-ai", "group": "vowel-team", "pattern": "ai / ay", "sound": "/eɪ/", "label": "ai·ay", "tip": "和魔法 e 的 a_e 同音：ai 多在词中，ay 常在词尾。", "examples": ["rain", "play", "wait", "day"] },
+    { "id": "vt-oa", "group": "vowel-team", "pattern": "oa / ow", "sound": "/oʊ/", "label": "oa·ow", "tip": "嘴唇从张到圆，慢慢收拢滑动。", "examples": ["boat", "snow", "coat", "know"] },
+    { "id": "vt-oo-long", "group": "vowel-team", "pattern": "oo（长）", "sound": "/uː/", "label": "oo 长", "tip": "双唇收得很圆很小，向前突出持续发声。", "examples": ["moon", "food", "school", "soon"] },
+    { "id": "vt-oo-short", "group": "vowel-team", "pattern": "oo（短）", "sound": "/ʊ/", "label": "oo 短", "tip": "嘴唇圆但放松、很短促，别拉成长 /uː/。", "examples": ["book", "good", "look", "foot"] },
+    { "id": "vt-ou", "group": "vowel-team", "pattern": "ou / ow", "sound": "/aʊ/", "label": "ou·ow", "tip": "从大开 /a/ 滑到圆唇 /ʊ/，像感到的“啊呜”。", "examples": ["house", "cow", "out", "now"] },
+    { "id": "vt-oi", "group": "vowel-team", "pattern": "oi / oy", "sound": "/ɔɪ/", "label": "oi·oy", "tip": "从圆唇后元音 /ɔ/ 滑向 /ɪ/，像小男孩惊呼的“欧伊”。", "examples": ["boy", "coin", "toy", "noise"] },
+
+    { "id": "rc-ar", "group": "r-controlled", "pattern": "ar", "sound": "/ɑːr/", "label": "ar", "tip": "嘴巴大开发“啊”，舌尖向后卷向 r 但不接触上颚。", "examples": ["car", "star", "far", "park"] },
+    { "id": "rc-or", "group": "r-controlled", "pattern": "or", "sound": "/ɔːr/", "label": "or", "tip": "双唇微圆突出，舌后抬高，带 r 的卷舌尾韵。", "examples": ["fork", "born", "sport", "morning"] },
+    { "id": "rc-er", "group": "r-controlled", "pattern": "er / ir / ur", "sound": "/ɜːr/", "label": "er·ir·ur", "tip": "三种拼写同一个音：舌中部抬起，扁嘴卷舌，像思考时的“呃～”。", "examples": ["her", "bird", "turn", "first"] },
+
+    { "id": "ed-t", "group": "endings", "pattern": "-ed（清后）", "sound": "/t/", "label": "-ed 读 /t/", "tip": "动词原形结尾是清辅音（k/p/f/s/ʃ/tʃ 等）时，-ed 只读一个轻 /t/。", "examples": ["walked", "washed", "laughed", "watched"] },
+    { "id": "ed-d", "group": "endings", "pattern": "-ed（浊后）", "sound": "/d/", "label": "-ed 读 /d/", "tip": "原形以浊辅音或元音结尾时，-ed 读作 /d/，注意别多加一个音节。", "examples": ["played", "cleaned", "loved", "called"] },
+    { "id": "ed-id", "group": "endings", "pattern": "-ed（t/d 后）", "sound": "/ɪd/", "label": "-ed 读 /ɪd/", "tip": "只有原形以 /t/ 或 /d/ 结尾时，-ed 才多出一个完整音节 /ɪd/。", "examples": ["wanted", "needed", "started", "decided"] },
+    { "id": "pl-s", "group": "endings", "pattern": "-s 复数", "sound": "/s/ /z/ /ɪz/", "label": "-s 的三种读法", "tip": "清辅音后 /s/（cats）、浊辅音和元音后 /z/（dogs）、s/sh/ch/x 后 /ɪz/（boxes）。", "examples": ["cats", "dogs", "boxes", "watches"] }
+  ],
+  "pairs": [
+    { "a": "ship", "b": "sheep", "ipa": "/ʃɪp/ vs /ʃiːp/", "tip": "短 /ɪ/ 放松短促；长 /iː/ 嘴角拉开并持续。" },
+    { "a": "bed", "b": "bad", "ipa": "/bɛd/ vs /bæd/", "tip": "/ɛ/ 嘴微张；/æ/ 嘴张到最大。" },
+    { "a": "cot", "b": "caught", "ipa": "/kɑːt/ vs /kɔːt/", "tip": "美式 /ɑː/ 嘴大开唇不圆；/ɔː/ 双唇收圆突出。" },
+    { "a": "full", "b": "fool", "ipa": "/fʊl/ vs /fuːl/", "tip": "/ʊ/ 圆唇但短促放松；/uː/ 收得很小并拉长。" },
+    { "a": "live", "b": "leave", "ipa": "/lɪv/ vs /liːv/", "tip": "尾音 /v/ 要振动声带（上齿咬下唇），不是 /f/。" },
+    { "a": "think", "b": "sink", "ipa": "/θɪŋk/ vs /sɪŋk/", "tip": "/θ/ 舌尖要露在齿间；/s/ 舌尖留在齿后。" },
+    { "a": "thin", "b": "tin", "ipa": "/θɪn/ vs /tɪn/", "tip": "th 送气持续、舌尖外露；t 是舌尖弹一下。" },
+    { "a": "bad", "b": "bat", "ipa": "/bæd/ vs /bæt/", "tip": "词尾 /d/ 振动声带；/t/ 只送气不振动。" },
+    { "a": "cap", "b": "cup", "ipa": "/kæp/ vs /kʌp/", "tip": "/æ/ 张嘴到最大；/ʌ/ 舌中部抬起、嘴半开。" },
+    { "a": "walk", "b": "work", "ipa": "/wɔːk/ vs /wɜːrk/", "tip": "/ɔːr/ 唇圆；/ɜːr/ 嘴扁而卷舌。" }
+  ]
+}

@@ -1,0 +1,355 @@
+{
+  "version": 1,
+  "note": "全部剧本为本项目原创写作，仅用于配音练习，可自由使用。myRole 表示由练习者配音的角色。",
+  "scenes": [
+    {
+      "id": "cafe-order",
+      "title": "咖啡馆点单",
+      "emoji": "☕",
+      "level": "beginner",
+      "levelName": "初级",
+      "desc": "日常最实用的点单对话，语速慢、句子短。",
+      "roles": [
+        { "id": "you", "name": "你（顾客）" },
+        { "id": "barista", "name": "店员" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "barista", "text": "Hi there! What can I get for you today?" },
+        { "speaker": "you", "text": "Hi, can I get a medium latte, please?", "zh": "你好，我要一杯中杯拿铁。" },
+        { "speaker": "barista", "text": "Sure! Would you like it hot or iced?" },
+        { "speaker": "you", "text": "Iced, please. It's really hot outside.", "zh": "冰的，谢谢。外面太热了。" },
+        { "speaker": "barista", "text": "Great choice. Anything to eat with that?" },
+        { "speaker": "you", "text": "Do you have any blueberry muffins left?", "zh": "你们还有蓝莓松饼吗？" },
+        { "speaker": "barista", "text": "We sure do. That'll be six fifty. Card or cash?" },
+        { "speaker": "you", "text": "Card, please. Here you go.", "zh": "刷卡。给你。" },
+        { "speaker": "barista", "text": "Thanks! Your order will be ready in two minutes." },
+        { "speaker": "you", "text": "Awesome, thanks so much. Have a good one!", "zh": "太好了，非常感谢。祝你愉快！" }
+      ]
+    },
+    {
+      "id": "airport-checkin",
+      "title": "机场值机",
+      "emoji": "✈️",
+      "level": "beginner",
+      "levelName": "初级",
+      "desc": "出差旅行第一关：换登机牌、托运行李。",
+      "roles": [
+        { "id": "you", "name": "你（旅客）" },
+        { "id": "agent", "name": "地勤人员" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "agent", "text": "Good morning! May I see your passport, please?" },
+        { "speaker": "you", "text": "Good morning. Here you are.", "zh": "早上好。给您。" },
+        { "speaker": "agent", "text": "Thank you. Are you checking any bags today?" },
+        { "speaker": "you", "text": "Just one suitcase. This backpack is my carry-on.", "zh": "只托运一个行李箱，这个背包是随身的。" },
+        { "speaker": "agent", "text": "Perfect. Please place the suitcase on the scale." },
+        { "speaker": "you", "text": "Sure. Is it under the weight limit?", "zh": "好的。超重了吗？" },
+        { "speaker": "agent", "text": "Twenty-two kilos — right on the limit. Lucky you!" },
+        { "speaker": "you", "text": "Ha, nice! Could I get a window seat if possible?", "zh": "哈哈，真好！可以的话能给我靠窗的座位吗？" },
+        { "speaker": "agent", "text": "Done. Gate B twelve, boarding at ten forty." },
+        { "speaker": "you", "text": "Gate B twelve. Thank you very much!", "zh": "B12 登机口。非常感谢！" }
+      ]
+    },
+    {
+      "id": "job-interview",
+      "title": "工作面试",
+      "emoji": "💼",
+      "level": "intermediate",
+      "levelName": "中级",
+      "desc": "经典面试场景，练习自我介绍与临场应答。",
+      "roles": [
+        { "id": "you", "name": "你（应聘者）" },
+        { "id": "hr", "name": "面试官" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "hr", "text": "Thanks for coming in. Tell me a little about yourself." },
+        { "speaker": "you", "text": "Of course. I've been working in digital marketing for five years.", "zh": "当然。我做数字营销已经五年了。" },
+        { "speaker": "hr", "text": "What made you apply for this position?" },
+        { "speaker": "you", "text": "Your team's creative campaigns really impressed me. I'd love to contribute to that.", "zh": "你们团队的创意营销让我印象深刻，我很想参与其中。" },
+        { "speaker": "hr", "text": "What would you say is your greatest strength?" },
+        { "speaker": "you", "text": "I stay calm under pressure and I learn fast when things get tough.", "zh": "我在压力下能保持冷静，遇到困难也学得很快。" },
+        { "speaker": "hr", "text": "Tell me about a time you failed at something." },
+        { "speaker": "you", "text": "I once launched a campaign that flopped. I studied the data, fixed the targeting, and doubled the results.", "zh": "我曾做过一次失败的活动，研究数据后调整投放，效果翻了一倍。" },
+        { "speaker": "hr", "text": "Excellent. Do you have any questions for us?" },
+        { "speaker": "you", "text": "Yes — what does success look like in this role after six months?", "zh": "有——入职六个月后，怎样才算做得好？" }
+      ]
+    },
+    {
+      "id": "lost-tourist",
+      "title": "街头问路",
+      "emoji": "🗺️",
+      "level": "beginner",
+      "levelName": "初级",
+      "desc": "在陌生城市迷路时的救命对话。",
+      "roles": [
+        { "id": "you", "name": "你（游客）" },
+        { "id": "local", "name": "路人" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "you", "text": "Excuse me, I think I'm a bit lost. Could you help me?", "zh": "打扰一下，我好像迷路了，能帮帮我吗？" },
+        { "speaker": "local", "text": "Of course! Where are you trying to go?" },
+        { "speaker": "you", "text": "I'm looking for the Central Art Museum.", "zh": "我在找中央美术馆。" },
+        { "speaker": "local", "text": "Oh, it's not far. Go straight for two blocks, then turn left." },
+        { "speaker": "you", "text": "Straight two blocks, then left. Is there a landmark?", "zh": "直走两个街区再左转。有什么标志建筑吗？" },
+        { "speaker": "local", "text": "You'll see a big red clock. The museum is right behind it." },
+        { "speaker": "you", "text": "That's super helpful. Should I take a bus instead?", "zh": "太有帮助了。要不要坐公交？" },
+        { "speaker": "local", "text": "No need — it's only a ten-minute walk." },
+        { "speaker": "you", "text": "Perfect. Thank you so much for your time!", "zh": "太好了，非常感谢你抽出时间！" }
+      ]
+    },
+    {
+      "id": "doctor-visit",
+      "title": "看医生",
+      "emoji": "🩺",
+      "level": "intermediate",
+      "levelName": "中级",
+      "desc": "描述症状、听懂医嘱，实用又有点难度的词汇。",
+      "roles": [
+        { "id": "you", "name": "你（病人）" },
+        { "id": "doc", "name": "医生" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "doc", "text": "Hello there. What brings you in today?" },
+        { "speaker": "you", "text": "I've had a sore throat and a slight fever since Monday.", "zh": "我从周一起嗓子疼，还有点发烧。" },
+        { "speaker": "doc", "text": "Any cough, or trouble swallowing?" },
+        { "speaker": "you", "text": "A dry cough at night, and it hurts a bit when I swallow.", "zh": "晚上会干咳，吞咽时有点疼。" },
+        { "speaker": "doc", "text": "Let me take a look. Open wide and say ah." },
+        { "speaker": "you", "text": "Ahhh. Is it serious, doctor?", "zh": "啊……严重吗，医生？" },
+        { "speaker": "doc", "text": "It's a mild infection. Rest, drink plenty of water, and no spicy food." },
+        { "speaker": "you", "text": "Got it. Do I need any medicine?", "zh": "明白了。需要吃药吗？" },
+        { "speaker": "doc", "text": "I'll prescribe something mild. You should feel better in three days." },
+        { "speaker": "you", "text": "Thank you, doctor. I really appreciate it.", "zh": "谢谢医生，非常感谢。" }
+      ]
+    },
+    {
+      "id": "movie-heist",
+      "title": "大片现场：屋顶夜戏",
+      "emoji": "🌃",
+      "level": "advanced",
+      "levelName": "高级",
+      "desc": "原创悬疑片段，短句密集、情绪张力强，适合当大片主角。",
+      "roles": [
+        { "id": "you", "name": "你（主角）" },
+        { "id": "partner", "name": "搭档" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "partner", "text": "You made it. For a second I thought you were gone." },
+        { "speaker": "you", "text": "I said I'd be here. Did anyone follow you?", "zh": "我说过会来。有人跟踪你吗？" },
+        { "speaker": "partner", "text": "Not that I saw. But the lights in the alley went out." },
+        { "speaker": "you", "text": "That's not a good sign. How much time do we have?", "zh": "这可不是好兆头。我们还有多少时间？" },
+        { "speaker": "partner", "text": "Four minutes before the guard comes back around." },
+        { "speaker": "you", "text": "Then we stop talking and start moving. Hand me the key.", "zh": "那就别说话了，开始行动。把钥匙给我。" },
+        { "speaker": "partner", "text": "Careful. This door hasn't been opened in years." },
+        { "speaker": "you", "text": "Years don't scare me. What waits on the other side does.", "zh": "年头吓不倒我，门后面等着的才可怕。" },
+        { "speaker": "partner", "text": "Whatever happens, we finish this tonight." },
+        { "speaker": "you", "text": "Together. Now — lights out.", "zh": "一起。现在——熄灯。" }
+      ]
+    },
+    {
+      "id": "phone-complaint",
+      "title": "客服电话：包裹丢了",
+      "emoji": "📦",
+      "level": "intermediate",
+      "levelName": "中级",
+      "desc": "礼貌但坚定地表达不满，练习谈判语气。",
+      "roles": [
+        { "id": "you", "name": "你（客户）" },
+        { "id": "rep", "name": "客服" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "rep", "text": "Thank you for calling. How can I help you today?" },
+        { "speaker": "you", "text": "Hi, I'm calling about order four-one-nine. It was supposed to arrive Tuesday.", "zh": "你好，我打电话是关于订单 419，本该周二送达。" },
+        { "speaker": "rep", "text": "Let me check that for you. One moment, please." },
+        { "speaker": "you", "text": "Sure. I've already checked the tracking twice though.", "zh": "好的，不过我已经查过两次物流了。" },
+        { "speaker": "rep", "text": "I see it here. It appears the package was delayed in transit." },
+        { "speaker": "you", "text": "I understand delays happen, but nobody notified me at all.", "zh": "我能理解延误，但完全没人通知我。" },
+        { "speaker": "rep", "text": "I apologize for that. I can issue a full refund right now." },
+        { "speaker": "you", "text": "I'd rather have it redelivered. Can you guarantee it by Friday?", "zh": "我更希望能重新派送。能保证周五前到吗？" },
+        { "speaker": "rep", "text": "Yes, I'll upgrade it to express at no extra charge." },
+        { "speaker": "you", "text": "That works. Please email me the confirmation.", "zh": "这样行。请把确认邮件发给我。" }
+      ]
+    },
+    {
+      "id": "restaurant-birthday",
+      "title": "餐厅生日惊喜",
+      "emoji": "🎂",
+      "level": "beginner",
+      "levelName": "初级",
+      "desc": "轻松愉快的生活场景，适合练情绪表达。",
+      "roles": [
+        { "id": "you", "name": "你（寿星朋友）" },
+        { "id": "waiter", "name": "服务员" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "waiter", "text": "Good evening! Table for how many?" },
+        { "speaker": "you", "text": "Six, please. We're celebrating a birthday tonight.", "zh": "六位，谢谢。我们今晚庆祝生日。" },
+        { "speaker": "waiter", "text": "Happy birthday to your friend! Follow me, please." },
+        { "speaker": "you", "text": "Could we sit by the window if it's free?", "zh": "如果空着的话，能坐靠窗吗？" },
+        { "speaker": "waiter", "text": "Absolutely. What would you like to drink first?" },
+        { "speaker": "you", "text": "Two sparkling waters and four iced teas.", "zh": "两瓶气泡水，四杯冰茶。" },
+        { "speaker": "waiter", "text": "Nice. And are you ready to order food?" },
+        { "speaker": "you", "text": "Not yet. Could you bring the cake after the main course?", "zh": "还没。主菜之后能上蛋糕吗？" },
+        { "speaker": "waiter", "text": "Of course! I'll bring it out with candles lit." },
+        { "speaker": "you", "text": "Perfect. This is going to make her night!", "zh": "太好了，这会让她整晚都开心！" }
+      ]
+    },
+    {
+      "id": "renting-flat",
+      "title": "租房看房",
+      "emoji": "🏠",
+      "level": "intermediate",
+      "levelName": "中级",
+      "desc": "和中介谈房租、押金与配套，海外生活必备。",
+      "roles": [
+        { "id": "you", "name": "你（租客）" },
+        { "id": "agent", "name": "中介" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "agent", "text": "Welcome in! It's a one-bedroom, fully furnished, on the fifth floor." },
+        { "speaker": "you", "text": "It's bright. How much is the rent per month?", "zh": "采光不错。月租多少？" },
+        { "speaker": "agent", "text": "One thousand two hundred, and that includes water and internet." },
+        { "speaker": "you", "text": "Does that cover electricity as well, or is it separate?", "zh": "包含电费吗，还是另算？" },
+        { "speaker": "agent", "text": "Electricity is separate. The deposit is one month's rent." },
+        { "speaker": "you", "text": "Is the deposit refundable when the lease ends?", "zh": "租约到期时押金会退吗？" },
+        { "speaker": "agent", "text": "Yes, as long as there's no damage. The lease is twelve months." },
+        { "speaker": "you", "text": "Could I think about it for a day or two?", "zh": "我能考虑一两天吗？" },
+        { "speaker": "agent", "text": "Sure, but two other people are interested." },
+        { "speaker": "you", "text": "Then I'll decide tonight and call you back.", "zh": "那我今晚就决定，然后给你回电话。" }
+      ]
+    },
+    {
+      "id": "gym-coach",
+      "title": "健身私教课",
+      "emoji": "🏋️",
+      "level": "beginner",
+      "levelName": "初级",
+      "desc": "短句多、节奏快，练连读和祈使句语气。",
+      "roles": [
+        { "id": "you", "name": "你（学员）" },
+        { "id": "coach", "name": "教练" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "coach", "text": "Ready? Start with ten squats, nice and slow." },
+        { "speaker": "you", "text": "Got it. Should I keep my back straight?", "zh": "明白。背要挺直吗？" },
+        { "speaker": "coach", "text": "Yes, chest up, knees out. Two more, you're doing great." },
+        { "speaker": "you", "text": "Thanks. My legs are already shaking!", "zh": "谢谢。我腿已经在抖了！" },
+        { "speaker": "coach", "text": "That's normal. Rest thirty seconds, then we do planks." },
+        { "speaker": "you", "text": "How long should I hold the plank?", "zh": "平板支撑要撑多久？" },
+        { "speaker": "coach", "text": "Start with twenty seconds. If it hurts, stop right away." },
+        { "speaker": "you", "text": "OK. Is it fine to train three times a week?", "zh": "好的。一周练三次可以吗？" },
+        { "speaker": "coach", "text": "That's perfect for a beginner." },
+        { "speaker": "you", "text": "Great, I'll see you on Thursday then.", "zh": "太好了，那周四见。" }
+      ]
+    },
+    {
+      "id": "class-intro",
+      "title": "课堂自我介绍",
+      "emoji": "🎒",
+      "level": "beginner",
+      "levelName": "初级",
+      "desc": "最经典的开口场景，慢速清晰，适合第一幕。",
+      "roles": [
+        { "id": "you", "name": "你（新同学）" },
+        { "id": "teacher", "name": "老师" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "teacher", "text": "Everyone, we have a new classmate today. Please introduce yourself." },
+        { "speaker": "you", "text": "Hi everyone, my name is Shengfei. Nice to meet you all.", "zh": "大家好，我叫盛飞。很高兴认识你们。" },
+        { "speaker": "teacher", "text": "Welcome, Shengfei! Where are you from?" },
+        { "speaker": "you", "text": "I'm from Shenzhen, in the south of China.", "zh": "我来自中国南方的深圳。" },
+        { "speaker": "teacher", "text": "And what do you do there?" },
+        { "speaker": "you", "text": "I work in software. This is my first time studying abroad.", "zh": "我做软件工作。这是我第一次出国学习。" },
+        { "speaker": "teacher", "text": "What made you choose this course?" },
+        { "speaker": "you", "text": "I want to speak more confidently, especially at work.", "zh": "我想说得更自信，尤其是在工作中。" },
+        { "speaker": "teacher", "text": "You're in the right place. Take a seat next to Anna." },
+        { "speaker": "you", "text": "Thank you, I'm really excited to be here.", "zh": "谢谢，能来这里我真的很兴奋。" }
+      ]
+    },
+    {
+      "id": "meeting-pushback",
+      "title": "会议上的反对意见",
+      "emoji": "📊",
+      "level": "advanced",
+      "levelName": "高级",
+      "desc": "礼貌而坚定地表达不同观点，高级职场表达。",
+      "roles": [
+        { "id": "you", "name": "你（产品经理）" },
+        { "id": "boss", "name": "主管" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "boss", "text": "So the plan is to launch on the fifteenth, no exceptions." },
+        { "speaker": "you", "text": "I understand the deadline, but I'd like to flag two risks first.", "zh": "我理解这个期限，但我想先指出两个风险。" },
+        { "speaker": "boss", "text": "Go ahead. What are they?" },
+        { "speaker": "you", "text": "Testing isn't finished, and support hasn't been trained yet.", "zh": "测试还没完成，客服也还没培训。" },
+        { "speaker": "boss", "text": "Both of those can happen after launch." },
+        { "speaker": "you", "text": "They can, but a rough launch costs more than a short delay.", "zh": "可以这样做，但糟糕的上线比短暂延期代价更大。" },
+        { "speaker": "boss", "text": "How long are we talking about?" },
+        { "speaker": "you", "text": "Five days. That gets us testing done and support ready.", "zh": "五天。这样测试能完成，客服也能就位。" },
+        { "speaker": "boss", "text": "Fine. Five days, and I want daily updates." },
+        { "speaker": "you", "text": "Agreed. I'll send a short report every evening.", "zh": "同意。我每天晚上发一份简短汇报。" }
+      ]
+    },
+    {
+      "id": "pharmacy-emergency",
+      "title": "药店求助",
+      "emoji": "💊",
+      "level": "intermediate",
+      "levelName": "中级",
+      "desc": "紧急但需说清症状的场景，练清晰表达。",
+      "roles": [
+        { "id": "you", "name": "你（顾客）" },
+        { "id": "pharm", "name": "药师" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "pharm", "text": "Hi, what can I help you with today?" },
+        { "speaker": "you", "text": "My daughter has a rash on her arms since this morning.", "zh": "我女儿从今天早上起胳膊上起了疹子。" },
+        { "speaker": "pharm", "text": "Is she itching a lot, or is there any fever?" },
+        { "speaker": "you", "text": "She keeps scratching, but no fever so far.", "zh": "她一直在抓，但目前没发烧。" },
+        { "speaker": "pharm", "text": "Has she eaten anything unusual in the last day?" },
+        { "speaker": "you", "text": "We tried a new brand of yogurt yesterday.", "zh": "我们昨天试了个新牌子的酸奶。" },
+        { "speaker": "pharm", "text": "Could be a mild allergy. I'd suggest a gentle cream for now." },
+        { "speaker": "you", "text": "Should I take her to see a doctor?", "zh": "需要带她去看医生吗？" },
+        { "speaker": "pharm", "text": "If it spreads or she has trouble breathing, go straight to the ER." },
+        { "speaker": "you", "text": "Understood. Thank you, that's very clear.", "zh": "明白了。谢谢你，说得很清楚。" }
+      ]
+    },
+    {
+      "id": "detective-final",
+      "title": "侦探剧：最后的推理",
+      "emoji": "🔎",
+      "level": "advanced",
+      "levelName": "高级",
+      "desc": "原创悬疑收尾戏，长句与情绪并重，适合当主角独白。",
+      "roles": [
+        { "id": "you", "name": "你（侦探）" },
+        { "id": "suspect", "name": "嫌疑人" }
+      ],
+      "myRole": "you",
+      "lines": [
+        { "speaker": "suspect", "text": "You have no proof. You're just guessing, like everyone else." },
+        { "speaker": "you", "text": "I'm not guessing. I've been listening to what you didn't say.", "zh": "我不是在猜。我一直在听你没说出口的部分。" },
+        { "speaker": "suspect", "text": "That's not evidence. That's a trick." },
+        { "speaker": "you", "text": "The door was locked from inside, yet the window was open all night.", "zh": "门是从里面锁上的，可窗户整晚都开着。" },
+        { "speaker": "suspect", "text": "So someone climbed in. That proves I'm innocent." },
+        { "speaker": "you", "text": "It proves the person who climbed in never needed to leave.", "zh": "这反而说明，爬进来的人根本不需要离开。" },
+        { "speaker": "suspect", "text": "You can't prove any of that." },
+        { "speaker": "you", "text": "Actually, I can. The dust on that windowsill has your fingerprints.", "zh": "事实上我能。那个窗台上的灰尘有你的指纹。" },
+        { "speaker": "suspect", "text": "…Then ask me what you already know." },
+        { "speaker": "you", "text": "Why did you do it? That's the only question left.", "zh": "你为什么要这么做？这是唯一剩下的问题了。" }
+      ]
+    }
+  ]
+}
